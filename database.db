@@ -1,0 +1,34 @@
+# ...
+
+def init_db():
+    conn = get_db()
+    cursor = conn.cursor()
+
+    # Create Product table
+    cursor.execute('''CREATE TABLE IF NOT EXISTS Product (
+                        product_id TEXT PRIMARY KEY
+                    )''')
+
+    # Create Location table
+    cursor.execute('''CREATE TABLE IF NOT EXISTS Location (
+                        location_id TEXT PRIMARY KEY
+                    )''')
+
+    # Create Product Movement table
+    cursor.execute('''CREATE TABLE IF NOT EXISTS ProductMovement (
+                        movement_id INTEGER PRIMARY KEY AUTOINCREMENT,
+                        timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                        from_location TEXT,
+                        to_location TEXT,
+                        product_id TEXT,
+                        qty INTEGER,
+                        FOREIGN KEY (product_id) REFERENCES Product (product_id),
+                        FOREIGN KEY (from_location) REFERENCES Location (location_id),
+                        FOREIGN KEY (to_location) REFERENCES Location (location_id)
+                    )''')
+
+    conn.commit()
+    conn.close()
+
+# Initialize the database on app startup
+init_db()

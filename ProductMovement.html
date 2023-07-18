@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add/Edit/View Product Movement</title>
+</head>
+<body>
+    <h1>Add/Edit/View Product Movement</h1>
+    <form method="POST" action="{{ url_for('add_movement') }}">
+        <label for="from_location">From Location:</label>
+        <input type="text" id="from_location" name="from_location">
+        <br>
+        <label for="to_location">To Location:</label>
+        <input type="text" id="to_location" name="to_location">
+        <br>
+        <label for="product_id">Product ID:</label>
+        <input type="text" id="product_id" name="product_id" required>
+        <br>
+        <label for="qty">Quantity:</label>
+        <input type="number" id="qty" name="qty" required>
+        <br>
+        <input type="submit" value="Add Movement">
+    </form>
+    <br>
+    <h2>Existing Movements:</h2>
+    <ul>
+        {% for movement in movements %}
+            <li>
+                Movement ID: {{ movement.movement_id }}, 
+                Timestamp: {{ movement.timestamp }}, 
+                From Location: {{ movement.from_location }}, 
+                To Location: {{ movement.to_location }}, 
+                Product ID: {{ movement.product_id }}, 
+                Quantity: {{ movement.qty }}
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

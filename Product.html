@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add/Edit/View Product</title>
+</head>
+<body>
+    <h1>Add/Edit/View Product</h1>
+
+    <form method="post">
+        <label for="product_id">Product ID:</label>
+        <input type="text" id="product_id" name="product_id" required>
+        <button type="submit">Add Product</button>
+    </form>
+
+    <hr>
+
+    <h2>Existing Products:</h2>
+    <ul>
+        {% for product_id in existing_products %}
+            <li>{{ product_id }}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
